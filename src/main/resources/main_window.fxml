@@ -35,12 +35,10 @@
                               <Insets top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <Separator prefWidth="200.0">
+                        <ListView fx:id="fusesList_listView" prefHeight="200.0" prefWidth="200.0" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
                            <VBox.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </VBox.margin>
-                        </Separator>
-                        <ListView fx:id="fusesList_listView" prefHeight="200.0" prefWidth="200.0" stylesheets="@styles.css" VBox.vgrow="ALWAYS" />
+                              <Insets top="10.0" />
+                           </VBox.margin></ListView>
                         <TextArea fx:id="result_textArea" prefHeight="200.0" prefWidth="200.0" />
                         <AnchorPane>
                            <children>

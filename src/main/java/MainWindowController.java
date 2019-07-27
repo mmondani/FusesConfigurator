@@ -13,6 +13,9 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 
@@ -22,14 +25,24 @@ public class MainWindowController implements Initializable {
     public TextArea result_textArea;
     public Button copy_button;
 
+    private Map<String, Integer> comboBoxesSelectedValues;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         pics_comboBox.getItems().addAll(PicsFusesModel.getInstance().getPics());
         pics_comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+            List<PicsFusesModel.Fuse> fusesList = PicsFusesModel.getInstance().getPicFuses(newValue.toString());
 
-            fusesList_listView.setItems(FXCollections.observableArrayList(PicsFusesModel.getInstance().getPicFuses(newValue.toString())));
+            fusesList_listView.setItems(null);
+            fusesList_listView.setItems(FXCollections.observableArrayList(fusesList));
 
+            comboBoxesSelectedValues = new HashMap<>(fusesList.size());
+            for (int i = 0; i < fusesList.size(); i++) {
+                comboBoxesSelectedValues.put(fusesList.get(i).getName(), 0);
+            }
+
+            updateOutputText();
         });
         pics_comboBox.getSelectionModel().select(0);
 
@@ -40,6 +53,16 @@ public class MainWindowController implements Initializable {
                 return new FuseCell();
             }
         });
+    }
+
+    private void updateOutputText () {
+        for (int i = 0; i < fusesList_listView.getItems().size(); i++) {
+            PicsFusesModel.Fuse fuse = (PicsFusesModel.Fuse)fusesList_listView.getItems().get(i);
+
+            System.out.print(fuse.getName() + " : ");
+            System.out.print(fuse.getValues().get(comboBoxesSelectedValues.get(fuse.getName())));
+            System.out.println();
+        }
     }
 
     private class FuseCell extends ListCell<PicsFusesModel.Fuse> {
@@ -65,7 +88,9 @@ public class MainWindowController implements Initializable {
                     fuseValues_comboBox.getItems().addAll(item.getValues());
                     fuseValues_comboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
                         if (oldValue != null && !oldValue.equals(newValue)) {
-                            
+                            comboBoxesSelectedValues.put(item.getName(), fuseValues_comboBox.getSelectionModel().getSelectedIndex());
+
+                            updateOutputText();
                         }
                     });
 
