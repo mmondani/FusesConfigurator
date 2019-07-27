@@ -1,0 +1,14 @@
+.list-cell {
+  -fx-selection-bar: white;
+  -fx-selection-bar-non-focused: white;
+  -fx-text-fill: black;
+}
+
+.list-view:focused {
+    -fx-background-color: transparent;
+}
+
+.list-cell:hover {
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: black;
+}

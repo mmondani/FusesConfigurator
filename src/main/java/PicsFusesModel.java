@@ -90,7 +90,7 @@ public class PicsFusesModel {
         return picsList;
     }
 
-    
+
     public List<Fuse> getPicFuses (String pic) {
         String config = picsConfigsMap.get(pic);
 
@@ -102,7 +102,7 @@ public class PicsFusesModel {
     }
 
 
-    private class Fuse {
+    public class Fuse {
         private String name;
         private String description;
         private int word;
