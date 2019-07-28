@@ -12,50 +12,71 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.MainWindowController">
-  <tabs>
-    <Tab text="Generar">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <VBox layoutX="21.0" layoutY="20.0" prefHeight="309.0" prefWidth="382.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <HBox>
+
+<VBox prefHeight="750.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.MainWindowController">
+   <children>
+      <HBox>
+         <children>
+            <Label fx:id="label4" alignment="TOP_CENTER" text="Microcontrolador">
+               <HBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </HBox.margin>
+            </Label>
+            <ComboBox fx:id="pics_comboBox" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </ComboBox>
+         </children>
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </HBox>
+      <AnchorPane>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+         <children>
+            <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <tabs>
+                <Tab text="Generar">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="label4" alignment="TOP_CENTER" text="Microcontrolador">
-                                 <HBox.margin>
-                                    <Insets left="10.0" top="5.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox fx:id="pics_comboBox" prefWidth="150.0">
-                                 <HBox.margin>
-                                    <Insets left="30.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <ListView fx:id="fusesList_listView" prefHeight="200.0" prefWidth="200.0" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin></ListView>
-                        <TextArea fx:id="result_textArea" editable="false" prefHeight="200.0" prefWidth="200.0" />
-                        <AnchorPane>
-                           <children>
-                              <Button fx:id="copy_button" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Copiar" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                              <VBox layoutX="21.0" layoutY="20.0" prefHeight="309.0" prefWidth="382.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <ListView fx:id="fusesList_listView" prefHeight="200.0" prefWidth="200.0" stylesheets="@styles.css" VBox.vgrow="ALWAYS">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </ListView>
+                                    <TextArea fx:id="result_textArea" editable="false" prefHeight="200.0" prefWidth="200.0">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </TextArea>
+                                    <AnchorPane>
+                                       <children>
+                                          <Button fx:id="copy_button" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Copiar" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                              </VBox>
                            </children>
                         </AnchorPane>
-                     </children>
-                  </VBox>
-               </children></AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="Parsear">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      </content>
-    </Tab>
-  </tabs>
-</TabPane>
+                  </content>
+                </Tab>
+                <Tab text="Parsear">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

@@ -17,7 +17,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("Fuses Configurator");
 
-        primaryStage.setScene(new Scene(root, 600, 700));
+        primaryStage.setScene(new Scene(root, 600, 740));
 
         primaryStage.setResizable(false);
 
