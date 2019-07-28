@@ -8,7 +8,7 @@
 		"config1": [{
 				"name": "FCMEN",
 				"description": "Fail-Safe Clock Monitor Enable",
-				"word": 8007,
+				"word": 1,
 				"offset": 13,
 				"bits": 1,
 				"values": [
@@ -19,7 +19,7 @@
 			{
 				"name": "IESO",
 				"description": "Internal External Switchover",
-				"word": 8007,
+				"word": 1,
 				"offset": 12,
 				"bits": 1,
 				"values": [
@@ -30,7 +30,7 @@
 			{
 				"name": "CLKOUTEN",
 				"description": "Clock Out Enable",
-				"word": 8007,
+				"word": 1,
 				"offset": 11,
 				"bits": 1,
 				"values": [
@@ -41,7 +41,7 @@
 			{
 				"name": "BOREN",
 				"description": "Brown-out Reset Enable",
-				"word": 8007,
+				"word": 1,
 				"offset": 9,
 				"bits": 2,
 				"values": [
@@ -54,7 +54,7 @@
 			{
 				"name": "CPD",
 				"description": "Data Code Protection",
-				"word": 8007,
+				"word": 1,
 				"offset": 8,
 				"bits": 1,
 				"values": [
@@ -65,7 +65,7 @@
 			{
 				"name": "CP",
 				"description": "Code Protection",
-				"word": 8007,
+				"word": 1,
 				"offset": 7,
 				"bits": 1,
 				"values": [
@@ -76,7 +76,7 @@
 			{
 				"name": "MCLRE",
 				"description": "RA3/MCLR/VPP Pin Function Select",
-				"word": 8007,
+				"word": 1,
 				"offset": 6,
 				"bits": 1,
 				"values": [
@@ -87,7 +87,7 @@
 			{
 				"name": "PWRTE",
 				"description": "Power-up Timer Enable",
-				"word": 8007,
+				"word": 1,
 				"offset": 5,
 				"bits": 1,
 				"values": [
@@ -98,7 +98,7 @@
 			{
 				"name": "WDTE",
 				"description": "Watchdog Timer Enable",
-				"word": 8007,
+				"word": 1,
 				"offset": 3,
 				"bits": 2,
 				"values": [
@@ -111,7 +111,7 @@
 			{
 				"name": "FOSC",
 				"description": "Oscillator Selection",
-				"word": 8007,
+				"word": 1,
 				"offset": 0,
 				"bits": 3,
 				"values": [
@@ -128,7 +128,7 @@
 			{
 				"name": "LVP",
 				"description": "Low voltage Programming",
-				"word": 8008,
+				"word": 2,
 				"offset": 13,
 				"bits": 1,
 				"values": [
@@ -139,7 +139,7 @@
 			{
 				"name": "DEBUG",
 				"description": "In-Circuit Debugger Mode",
-				"word": 8008,
+				"word": 2,
 				"offset": 12,
 				"bits": 1,
 				"values": [
@@ -150,7 +150,7 @@
 			{
 				"name": "BORV",
 				"description": "Brown-out Reset Voltage Selection",
-				"word": 8008,
+				"word": 2,
 				"offset": 10,
 				"bits": 1,
 				"values": [
@@ -161,7 +161,7 @@
 			{
 				"name": "STVREN",
 				"description": "Stack Overflow/Underflow Reset Enable",
-				"word": 8008,
+				"word": 2,
 				"offset": 9,
 				"bits": 1,
 				"values": [
@@ -172,7 +172,7 @@
 			{
 				"name": "PLLEN",
 				"description": "PLL Enable",
-				"word": 8008,
+				"word": 2,
 				"offset": 8,
 				"bits": 1,
 				"values": [
@@ -183,7 +183,7 @@
 			{
 				"name": "WRT",
 				"description": " Flash Memory Self-Write Protection bits",
-				"word": 8008,
+				"word": 2,
 				"offset": 0,
 				"bits": 2,
 				"values": [

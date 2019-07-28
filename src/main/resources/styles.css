@@ -4,6 +4,10 @@
   -fx-text-fill: black;
 }
 
+list-view > list-cell {
+    -fx-background-color: white;
+}
+
 .list-view:focused {
     -fx-background-color: transparent;
 }

@@ -13,10 +13,7 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class MainWindowController implements Initializable {
@@ -39,7 +36,7 @@ public class MainWindowController implements Initializable {
 
             comboBoxesSelectedValues = new HashMap<>(fusesList.size());
             for (int i = 0; i < fusesList.size(); i++) {
-                comboBoxesSelectedValues.put(fusesList.get(i).getName(), 0);
+                comboBoxesSelectedValues.put(fusesList.get(i).getName(), fusesList.get(i).getValues().size() - 1);
             }
 
             updateOutputText();
@@ -56,13 +53,59 @@ public class MainWindowController implements Initializable {
     }
 
     private void updateOutputText () {
+        Byte[] configWord1 = new Byte[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+        Byte[] configWord2 = new Byte[] {1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+
+
+        for (int i = 0; i < fusesList_listView.getItems().size(); i++) {
+            PicsFusesModel.Fuse fuse = (PicsFusesModel.Fuse)fusesList_listView.getItems().get(i);
+            int valueIndex = comboBoxesSelectedValues.get(fuse.getName());
+            int offset = fuse.getOffset();
+            int bits = fuse.getBits();
+
+            if (fuse.getWord() == 1) {
+                for (int j = 0; j < bits; j++) {
+                    if ((valueIndex & (1 << j)) == 0)
+                        configWord1[offset + j] = 0;
+                    else
+                        configWord1[offset + j] = 1;
+                }
+            }
+            else if (fuse.getWord() == 2) {
+                for (int j = 0; j < bits; j++) {
+                    if ((valueIndex & (1 << j)) == 0)
+                        configWord2[offset + j] = 0;
+                    else
+                        configWord2[offset + j] = 1;
+                }
+            }
+        }
+
+
+        Collections.reverse(Arrays.asList(configWord1));
+        Collections.reverse(Arrays.asList(configWord2));
+
+        String configWord1String = "";
+        String configWord2String = "";
+        for (int i = 0; i < configWord1.length; i++) {
+            configWord1String += Integer.toString(configWord1[i]);
+            configWord2String += Integer.toString(configWord2[i]);
+        }
+
+
+        result_textArea.clear();
+        result_textArea.appendText("8007h\t" + configWord1String);
+        result_textArea.appendText("\n8008h\t" + configWord2String);
+        result_textArea.appendText("\n");
         for (int i = 0; i < fusesList_listView.getItems().size(); i++) {
             PicsFusesModel.Fuse fuse = (PicsFusesModel.Fuse)fusesList_listView.getItems().get(i);
 
-            System.out.print(fuse.getName() + " : ");
-            System.out.print(fuse.getValues().get(comboBoxesSelectedValues.get(fuse.getName())));
-            System.out.println();
+            result_textArea.appendText("\n;" +
+                    fuse.getName() + " : " +
+                    fuse.getValues().get(comboBoxesSelectedValues.get(fuse.getName())));
         }
+
+        result_textArea.setScrollTop(0.0);
     }
 
     private class FuseCell extends ListCell<PicsFusesModel.Fuse> {
@@ -94,8 +137,7 @@ public class MainWindowController implements Initializable {
                         }
                     });
 
-
-                    fuseValues_comboBox.getSelectionModel().select(0);
+                    fuseValues_comboBox.getSelectionModel().select(item.getValues().size() - 1);
 
                 }
                 catch (IOException ioe) {
