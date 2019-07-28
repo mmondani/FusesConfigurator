@@ -14,13 +14,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../resources/main_window.fxml"));
-
         primaryStage.setTitle("Fuses Configurator");
-
         primaryStage.setScene(new Scene(root, 600, 740));
-
         primaryStage.setResizable(false);
-
         primaryStage.show();
     }
 

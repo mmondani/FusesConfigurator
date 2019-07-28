@@ -5,12 +5,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -42,6 +44,8 @@ public class MainWindowController implements Initializable {
                 comboBoxesSelectedValues.put(fusesList.get(i).getName(), fusesList.get(i).getValues().size() - 1);
             }
 
+            fusesList_listView.refresh();
+
             updateOutputText();
         });
         pics_comboBox.getSelectionModel().select(0);
@@ -61,7 +65,23 @@ public class MainWindowController implements Initializable {
 
 
         load_button.setOnMouseClicked(event -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/load_config_words.fxml"));
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setTitle("Cargar Configuration Words");
+                stage.setScene(new Scene(root));
+                //stage.setScene(new Scene(root, 600, 740));
+                stage.setResizable(false);
 
+                LoadConfigWordsWindowController dialogController = loader.getController();
+                dialogController.setMainController(this);
+
+                stage.show();
+            }
+            catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
         });
     }
 
@@ -120,6 +140,52 @@ public class MainWindowController implements Initializable {
         result_textArea.setScrollTop(0.0);
     }
 
+
+    public void updateOutputText (String word1, String word2) {
+        if (word1.length() != 14 || word2.length() != 14)
+            return;
+
+        Byte[] configWord1 = new Byte[14];
+        Byte[] configWord2 = new Byte[14];
+
+        for (int i = 0; i < 14; i++) {
+            if (word1.charAt(i) == '1')
+                configWord1[i] = (byte)1;
+            else
+                configWord1[i] = (byte)0;
+
+            if (word2.charAt(i) == '1')
+                configWord2[i] = (byte)1;
+            else
+                configWord2[i] = (byte)0;
+        }
+
+
+        for (PicsFusesModel.Fuse fuse : PicsFusesModel.getInstance().getPicFuses(pics_comboBox.getValue())) {
+            int offset = fuse.getOffset();
+            int bits = fuse.getBits();
+            int index = (offset - 13)*(-1) - bits + 1;
+            String bitsString = "";
+
+            if (fuse.getWord() == 1)
+                bitsString = word1.substring(index, index + bits);
+            else if (fuse.getWord() == 2)
+                bitsString = word2.substring(index, index + bits);
+
+            comboBoxesSelectedValues.put(fuse.getName(), Integer.valueOf(bitsString, 2));
+        }
+
+        fusesList_listView.refresh();
+
+        updateOutputText();
+    }
+
+
+    public void loadConfigWordsWindow_onAcceptClicked (String word1, String word2) {
+        updateOutputText(word1, word2);
+    }
+
+
     private class FuseCell extends ListCell<PicsFusesModel.Fuse> {
         @Override
         protected void updateItem(PicsFusesModel.Fuse item, boolean empty) {
@@ -149,7 +215,7 @@ public class MainWindowController implements Initializable {
                         }
                     });
 
-                    fuseValues_comboBox.getSelectionModel().select(item.getValues().size() - 1);
+                    fuseValues_comboBox.getSelectionModel().select(comboBoxesSelectedValues.get(item.getName()));
 
                 }
                 catch (IOException ioe) {
