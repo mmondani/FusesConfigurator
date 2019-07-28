@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -43,12 +45,17 @@ public class MainWindowController implements Initializable {
         });
         pics_comboBox.getSelectionModel().select(0);
 
-
         fusesList_listView.setCellFactory(new Callback<ListView<PicsFusesModel.Fuse>, ListCell<PicsFusesModel.Fuse>>() {
             @Override
             public ListCell<PicsFusesModel.Fuse> call(ListView<PicsFusesModel.Fuse> param) {
                 return new FuseCell();
             }
+        });
+
+        copy_button.setOnMouseClicked(event -> {
+            final ClipboardContent content = new ClipboardContent();
+            content.putString(result_textArea.getText());
+            Clipboard.getSystemClipboard().setContent(content);
         });
     }
 
@@ -94,14 +101,14 @@ public class MainWindowController implements Initializable {
 
 
         result_textArea.clear();
-        result_textArea.appendText("8007h\t" + configWord1String);
-        result_textArea.appendText("\n8008h\t" + configWord2String);
+        result_textArea.appendText("\t\t8007h\t" + configWord1String);
+        result_textArea.appendText("\n\t\t8008h\t" + configWord2String);
         result_textArea.appendText("\n");
         for (int i = 0; i < fusesList_listView.getItems().size(); i++) {
             PicsFusesModel.Fuse fuse = (PicsFusesModel.Fuse)fusesList_listView.getItems().get(i);
 
             result_textArea.appendText("\n;" +
-                    fuse.getName() + " : " +
+                    fuse.getName() + ": " +
                     fuse.getValues().get(comboBoxesSelectedValues.get(fuse.getName())));
         }
 
