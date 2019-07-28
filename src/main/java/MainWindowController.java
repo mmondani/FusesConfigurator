@@ -23,6 +23,7 @@ public class MainWindowController implements Initializable {
     public ListView<PicsFusesModel.Fuse> fusesList_listView;
     public TextArea result_textArea;
     public Button copy_button;
+    public Button load_button;
 
     private Map<String, Integer> comboBoxesSelectedValues;
 
@@ -57,6 +58,11 @@ public class MainWindowController implements Initializable {
             content.putString(result_textArea.getText());
             Clipboard.getSystemClipboard().setContent(content);
         });
+
+
+        load_button.setOnMouseClicked(event -> {
+
+        });
     }
 
     private void updateOutputText () {
@@ -87,7 +93,6 @@ public class MainWindowController implements Initializable {
                 }
             }
         }
-
 
         Collections.reverse(Arrays.asList(configWord1));
         Collections.reverse(Arrays.asList(configWord2));

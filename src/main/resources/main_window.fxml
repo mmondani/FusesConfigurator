@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox prefHeight="750.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.MainWindowController">
    <children>
       <HBox>
@@ -58,6 +57,7 @@
                                     <AnchorPane>
                                        <children>
                                           <Button fx:id="copy_button" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Copiar" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                                          <Button fx:id="load_button" layoutX="14.0" layoutY="5.0" mnemonicParsing="false" text="Cargar" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>

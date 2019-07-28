@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane prefHeight="150.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="main.java.LoadConfigWordsWindowController">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="68.0" minWidth="55.0" prefWidth="68.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.0" minWidth="10.0" prefWidth="288.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="54.0" minHeight="38.0" prefHeight="54.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="267.0" minHeight="14.0" prefHeight="41.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="335.0" minHeight="38.0" prefHeight="53.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="Word 1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+      <Label text="Word 2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <TextField fx:id="word1_textField" GridPane.columnIndex="1" GridPane.columnSpan="2">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="word2_textField" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <Button fx:id="accept_button" mnemonicParsing="false" text="Aceptar" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Button fx:id="cancel_button" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+   </children>
+</GridPane>
