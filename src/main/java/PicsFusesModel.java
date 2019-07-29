@@ -3,8 +3,7 @@ package main.java;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -22,54 +21,43 @@ public class PicsFusesModel {
 
 
     private PicsFusesModel () {
-        try {
-            URI uri = getClass().getResource("/config_pics.json").toURI();
-            System.out.println(uri);
-            Path path = Paths.get(uri);
-            String jsonFileConent = new String(Files.readAllBytes(path));
+        String jsonFileConent = readResourceToString("config_pics.json");
 
-            picsConfigsMap = new HashMap<>();
-            configsFusesMap = new HashMap<>();
+        picsConfigsMap = new HashMap<>();
+        configsFusesMap = new HashMap<>();
 
-            JSONObject obj = new JSONObject(jsonFileConent);
-            JSONObject picsObject = obj.getJSONObject("pics");
-            JSONObject configsObject = obj.getJSONObject("configs");
+        JSONObject obj = new JSONObject(jsonFileConent);
+        JSONObject picsObject = obj.getJSONObject("pics");
+        JSONObject configsObject = obj.getJSONObject("configs");
 
 
-            for (String key : picsObject.keySet()) {
-                picsConfigsMap.put(key, picsObject.getString(key));
-            }
+        for (String key : picsObject.keySet()) {
+            picsConfigsMap.put(key, picsObject.getString(key));
+        }
 
-            for (String key : configsObject.keySet()) {
-                JSONArray fusesArray =  configsObject.getJSONArray(key);
+        for (String key : configsObject.keySet()) {
+            JSONArray fusesArray =  configsObject.getJSONArray(key);
 
-                List<Fuse> fusesList = new ArrayList<>();
-                for (int i = 0; i < fusesArray.length(); i++) {
-                    JSONObject fuseObject = fusesArray.getJSONObject(i);
+            List<Fuse> fusesList = new ArrayList<>();
+            for (int i = 0; i < fusesArray.length(); i++) {
+                JSONObject fuseObject = fusesArray.getJSONObject(i);
 
 
-                    JSONArray valuesArray = fuseObject.getJSONArray("values");
-                    List<String> valuesList = new ArrayList<>();
-                    for (int j = 0; j < valuesArray.length(); j++) {
-                        valuesList.add(valuesArray.getString(j));
-                    }
-
-                    fusesList.add(new Fuse(fuseObject.getString("name"),
-                            fuseObject.getString("description"),
-                            fuseObject.getInt("word"),
-                            fuseObject.getInt("offset"),
-                            fuseObject.getInt("bits"),
-                            valuesList));
+                JSONArray valuesArray = fuseObject.getJSONArray("values");
+                List<String> valuesList = new ArrayList<>();
+                for (int j = 0; j < valuesArray.length(); j++) {
+                    valuesList.add(valuesArray.getString(j));
                 }
 
-                configsFusesMap.put(key, fusesList);
+                fusesList.add(new Fuse(fuseObject.getString("name"),
+                        fuseObject.getString("description"),
+                        fuseObject.getInt("word"),
+                        fuseObject.getInt("offset"),
+                        fuseObject.getInt("bits"),
+                        valuesList));
             }
-        }
-        catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        catch (URISyntaxException use) {
-            use.printStackTrace();
+
+            configsFusesMap.put(key, fusesList);
         }
 
     }
@@ -103,6 +91,32 @@ public class PicsFusesModel {
         return null;
     }
 
+
+    private String readResourceToString (String resource) {
+        // para cargar el archivo desde un jar
+        InputStream input = PicsFusesModel.class.getResourceAsStream("/resources/" + resource);
+        if (input == null) {
+            // para cargar el archivo al correr en el IDE
+            input = PicsFusesModel.class.getClassLoader().getResourceAsStream(resource);
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(input));
+
+        StringBuilder resultBuilder = new StringBuilder();
+        String line;
+
+        try {
+            while ((line = br.readLine()) != null) {
+                resultBuilder.append(line);
+            }
+        }
+        catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+
+        return resultBuilder.toString();
+    }
 
     public class Fuse {
         private String name;

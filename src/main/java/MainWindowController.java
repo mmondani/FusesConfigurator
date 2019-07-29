@@ -65,12 +65,9 @@ public class MainWindowController implements Initializable {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/load_config_words.fxml"));
                 Parent root = loader.load();
-                //FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/load_config_words.fxml"));
-                //Parent root = loader.load();
                 Stage stage = new Stage();
                 stage.setTitle("Cargar Configuration Words");
                 stage.setScene(new Scene(root));
-                //stage.setScene(new Scene(root, 600, 740));
                 stage.setResizable(false);
 
                 LoadConfigWordsWindowController dialogController = loader.getController();
@@ -196,8 +193,6 @@ public class MainWindowController implements Initializable {
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/fuse_list_element.fxml"));
                     root = loader.load();
-
-                    //root = FXMLLoader.load(MainWindowController.class.getResource("/main/resources/fuse_list_element.fxml"));
 
                     Label fuseName_label;
                     Label fuseDescription_label;
