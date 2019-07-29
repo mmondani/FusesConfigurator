@@ -3,9 +3,9 @@ package main.java;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,7 +23,9 @@ public class PicsFusesModel {
 
     private PicsFusesModel () {
         try {
-            Path path = Paths.get(PicsFusesModel.class.getResource("/main/resources/config_pics.json").toURI());
+            URI uri = getClass().getResource("/config_pics.json").toURI();
+            System.out.println(uri);
+            Path path = Paths.get(uri);
             String jsonFileConent = new String(Files.readAllBytes(path));
 
             picsConfigsMap = new HashMap<>();

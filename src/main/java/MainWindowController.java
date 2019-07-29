@@ -1,7 +1,6 @@
 package main.java;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -9,9 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -66,8 +62,11 @@ public class MainWindowController implements Initializable {
 
         load_button.setOnMouseClicked(event -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/load_config_words.fxml"));
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/load_config_words.fxml"));
                 Parent root = loader.load();
+                //FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/load_config_words.fxml"));
+                //Parent root = loader.load();
                 Stage stage = new Stage();
                 stage.setTitle("Cargar Configuration Words");
                 stage.setScene(new Scene(root));
@@ -194,7 +193,11 @@ public class MainWindowController implements Initializable {
             Parent root = null;
             if (item != null) {
                 try {
-                    root = FXMLLoader.load(getClass().getResource("../resources/fuse_list_element.fxml"));
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/fuse_list_element.fxml"));
+                    root = loader.load();
+
+                    //root = FXMLLoader.load(MainWindowController.class.getResource("/main/resources/fuse_list_element.fxml"));
 
                     Label fuseName_label;
                     Label fuseDescription_label;
